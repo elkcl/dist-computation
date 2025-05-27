@@ -78,7 +78,7 @@ int main(int argc, char **argv) {
         controller_destroy(ctrl);
         exit(EXIT_FAILURE);
     }
-    if (set_timeout(10000) < 0) {
+    if (set_timeout(10) < 0) {
         fprintf(stderr, "set_timeout() failed\n");
         controller_destroy(ctrl);
         exit(EXIT_FAILURE);

@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "failed to initialize worker\n");
         exit(EXIT_FAILURE);
     }
-    if (set_timeout(10000) < 0) {
+    if (set_timeout(10) < 0) {
         fprintf(stderr, "set_timeout() failed\n");
         worker_destroy(worker);
         exit(EXIT_FAILURE);

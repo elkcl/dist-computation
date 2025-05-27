@@ -7,7 +7,7 @@
 void timer_handler(int signum) {
     (void) signum;
     fprintf(stderr, "time's up!\n");
-    exit(EXIT_FAILURE);
+    kill(getpid(), SIGTERM);
 }
 
 int set_timeout(int delay) {

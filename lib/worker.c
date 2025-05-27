@@ -149,6 +149,7 @@ void *worker_proc(void *args) {
             fprintf(stderr, "worker_proc: get_task() failed\n");
             exit(EXIT_FAILURE);
         } else if (task.id == 0) {
+            printf("finished!\n");
             break;
         }
         size_t result_sz;

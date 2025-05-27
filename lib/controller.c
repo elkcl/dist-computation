@@ -120,6 +120,10 @@ void *controller_conn(void *args) {
         if (msg_sz == 0) {
             break;
         }
+        if (msg == NULL) {
+            fprintf(stderr, "controller_conn: conn_read() failed");
+            exit(EXIT_FAILURE);
+        }
 
         switch (msg->type) {
             case MSG_GET_TASK:
