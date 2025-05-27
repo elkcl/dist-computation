@@ -2,10 +2,12 @@ ifeq ($(LLVM),1)
 	LLVM = 1
 	CC = clang
 	LD = ld.lld
+	LDFLAGS = -pthread
 else
 	LLVM = 0
 	CC = gcc
 	LD = ld
+	LDFLAGS = -pthread -lrt
 endif
 
 BUILD_DIR = build
@@ -16,7 +18,6 @@ CFLAGS = \
 	-Wextra  \
 	-Werror
 
-LDFLAGS = -pthread -lrt -lm
 
 ifeq ($(DEBUG),1)
 	CFLAGS += -O0 -g -fsanitize=address,leak,undefined
@@ -74,10 +75,10 @@ LIBSRC=$(wildcard lib/*.c)
 LIBOBJ=$(patsubst %.c,$(BUILD_DIR)/%.o,$(LIBSRC))
 
 $(BUILD_DIR)/int_controller: int_controller.c $(HEADERS) $(BUILD_DIR)/libdistcomp.a | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@ -ldistcomp -L$(BUILD_DIR)
+	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@ -ldistcomp -L$(BUILD_DIR) -lm
 
 $(BUILD_DIR)/int_worker: int_worker.c $(HEADERS) $(BUILD_DIR)/libdistcomp.a | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@ -ldistcomp -L$(BUILD_DIR)
+	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@ -ldistcomp -L$(BUILD_DIR) -lm
 
 $(BUILD_DIR)/libdistcomp.a: $(LIBOBJ) | $(BUILD_DIR)
 	ar rcs $@ $^
