@@ -1,0 +1,7 @@
+CompileFlags:
+  Add:
+    - "-std=gnu23"
+    - "-xc-header"
+    - "-pthread"
+    - "-lpthread"
+    - "-lrt"
